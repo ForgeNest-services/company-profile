@@ -7,7 +7,7 @@ import Footer from "@/components/landing/Footer";
 export default function Home() {
   return (
     <>
-      <main className="relative">
+      <main className="relative max-w-screen-4xl mx-auto">
         <HeroSection />
         <AboutSection />
         <ServicesSection />

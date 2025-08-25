@@ -106,7 +106,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-24 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden"
+      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -133,32 +133,32 @@ export default function ContactSection() {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-screen-2xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div
-          className={`text-center mb-20 transition-all duration-1000 ${
+          className={`text-center mb-12 lg:mb-20 transition-all duration-1000 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <div className="inline-flex items-center px-4 py-2 bg-blue-600/10 border border-blue-200 rounded-full text-blue-700 text-sm font-medium mb-6">
-            <MessageSquare className="w-4 h-4 mr-2" />
+          <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-600/10 border border-blue-200 rounded-full text-blue-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+            <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
             Let's Connect
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-4 lg:mb-6">
             Get In
             <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Touch
             </span>
           </h2>
 
-          <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4">
             Ready to start your project? We&apos;d love to hear from you. Send
             us a message and we&apos;ll respond as soon as possible.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
           {/* Contact Info */}
           <div
             className={`space-y-8 transition-all duration-1000 delay-300 ${
@@ -167,12 +167,12 @@ export default function ContactSection() {
                 : "-translate-x-10 opacity-0"
             }`}
           >
-            <div className="space-y-6">
-              <div className="flex items-center space-x-3 mb-8">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
-                  <Sparkles className="w-6 h-6 text-white" />
+            <div className="space-y-4 sm:space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mb-6 sm:mb-8 text-center sm:text-left">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mx-auto sm:mx-0 mb-3 sm:mb-0">
+                  <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900">
                   Let's Start Something Great
                 </h3>
               </div>
@@ -180,46 +180,46 @@ export default function ContactSection() {
               {contactInfo.map((info, index) => (
                 <div
                   key={index}
-                  className="group bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/50 hover:scale-105"
+                  className="group bg-white/80 backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/50 hover:scale-105"
                   style={{ animationDelay: `${index * 150}ms` }}
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-3 sm:gap-4">
                     <div
-                      className={`w-14 h-14 bg-gradient-to-br ${info.gradient} rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}
+                      className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br ${info.gradient} rounded-xl sm:rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}
                     >
-                      <info.icon className="w-7 h-7 text-white" />
+                      <info.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-lg text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-bold text-base sm:text-lg text-slate-900 mb-1 sm:mb-2 group-hover:text-blue-600 transition-colors">
                         {info.title}
                       </h4>
-                      <p className="text-slate-700 font-medium mb-1 group-hover:text-slate-900 transition-colors">
+                      <p className="text-slate-700 font-medium mb-1 group-hover:text-slate-900 transition-colors text-sm sm:text-base break-words">
                         {info.value}
                       </p>
-                      <p className="text-sm text-gray-500 group-hover:text-gray-600 transition-colors">
+                      <p className="text-xs sm:text-sm text-gray-500 group-hover:text-gray-600 transition-colors">
                         {info.description}
                       </p>
                     </div>
                   </div>
 
                   {/* Hover indicator */}
-                  <div className="mt-4 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></div>
+                  <div className="mt-3 sm:mt-4 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></div>
                 </div>
               ))}
             </div>
 
             {/* Additional info */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-1 rounded-2xl">
-              <div className="bg-white rounded-xl p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                    <Clock className="w-5 h-5 text-white" />
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-1 rounded-xl sm:rounded-2xl">
+              <div className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6">
+                <div className="flex items-start space-x-3 sm:space-x-4">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-1">
+                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 mb-2">
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-semibold text-slate-900 mb-1 sm:mb-2 text-sm sm:text-base">
                       Quick Response Promise
                     </h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                       We understand time is valuable. Our team commits to
                       responding to all inquiries within 24 hours, often much
                       sooner. Your project deserves immediate attention.
@@ -232,24 +232,24 @@ export default function ContactSection() {
 
           {/* Contact Form */}
           <div
-            className={`transition-all duration-1000 delay-500  lg:pt-36 ${
+            className={`transition-all duration-1000 delay-500 ${
               isVisible
                 ? "translate-x-0 opacity-100"
                 : "translate-x-10 opacity-0"
             }`}
           >
-            <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-white/50">
-              <div className="flex items-center space-x-3 mb-8">
-                <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
-                  <Send className="w-5 h-5 text-white" />
+            <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-2xl border border-white/50">
+              <div className="flex items-center space-x-2 sm:space-x-3 mb-6 sm:mb-8">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg sm:rounded-xl flex items-center justify-center">
+                  <Send className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900">
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900">
                   Send us a Message
                 </h3>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div className="group">
                     <label
                       htmlFor="name"

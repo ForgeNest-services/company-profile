@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Link as ScrollLink } from "react-scroll";
 import {
   ArrowRight,
   ChevronDown,
@@ -29,19 +30,6 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToAbout = () => {
-    const aboutSection = document.getElementById("about");
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
-  const scrollToContact = () => {
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
 
   return (
     <section id="home" className="min-h-screen pt-20 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
@@ -71,7 +59,7 @@ export default function HeroSection() {
       </div>
 
       {/* Main content grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content */}
           <div
@@ -137,24 +125,27 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button
-                onClick={scrollToAbout}
-                size="lg"
-                className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              <ScrollLink
+                to="about"
+                smooth={true}
+                duration={500}
+                offset={-80}
+                className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer inline-flex items-center justify-center"
               >
                 <Play className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" />
                 Get Started
-              </Button>
+              </ScrollLink>
 
-              <Button
-                onClick={scrollToContact}
-                variant="outline"
-                size="lg"
-                className="border-2 border-white/20 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:border-white/40"
+              <ScrollLink
+                to="contact"
+                smooth={true}
+                duration={500}
+                offset={-80}
+                className="border-2 border-white/20 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:border-white/40 cursor-pointer inline-flex items-center justify-center"
               >
                 Learn More
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
+              </ScrollLink>
             </div>
           </div>
 
@@ -221,13 +212,16 @@ export default function HeroSection() {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <button
-            onClick={scrollToAbout}
-            className="animate-bounce text-white/60 hover:text-white transition-colors p-2"
+          <ScrollLink
+            to="about"
+            smooth={true}
+            duration={500}
+            offset={-80}
+            className="animate-bounce text-white/60 hover:text-white transition-colors p-2 cursor-pointer inline-block"
             aria-label="Scroll to about section"
           >
             <ChevronDown className="w-8 h-8" />
-          </button>
+          </ScrollLink>
         </div>
       </div>
 

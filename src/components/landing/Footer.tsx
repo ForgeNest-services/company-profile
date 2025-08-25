@@ -138,7 +138,7 @@ export default function Footer() {
         </div>
 
         {/* Main footer content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+        <div className="max-w-screen-2xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* Company Info */}
             <div

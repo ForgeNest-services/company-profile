@@ -77,7 +77,7 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-7xl mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
+      <nav className="max-w-screen-2xl w-full mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <div className="relative z-10">
           <ScrollLink
