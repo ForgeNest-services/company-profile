@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-// import { submitContactForm, type ContactFormData } from "@/actions/contact";
+import { submitContactForm, type ContactFormData } from "@/actions/contact";
 import {
   Mail,
   Phone,
@@ -16,24 +16,6 @@ import {
   Sparkles,
   ArrowRight,
 } from "lucide-react";
-
-// Temporary type definition for the contact form
-type ContactFormData = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
-
-// Temporary mock function for form submission
-const submitContactForm = async (data: ContactFormData) => {
-  // Simulate API call
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  return {
-    success: true,
-    message: "Thank you! Your message has been sent successfully.",
-  };
-};
 
 export default function ContactSection() {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -250,7 +232,7 @@ export default function ContactSection() {
 
           {/* Contact Form */}
           <div
-            className={`transition-all duration-1000 delay-500 ${
+            className={`transition-all duration-1000 delay-500  lg:pt-36 ${
               isVisible
                 ? "translate-x-0 opacity-100"
                 : "translate-x-10 opacity-0"

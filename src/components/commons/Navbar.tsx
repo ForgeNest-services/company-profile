@@ -1,17 +1,16 @@
 "use client";
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Link as ScrollLink } from "react-scroll";
 import { useState, useEffect } from "react";
 import { Menu, X, Sparkles, ArrowRight } from "lucide-react";
 import Image from "next/image";
 
-// Mock navLinks data - replace with your actual import
+// Navigation links data
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", to: "home" },
+  { label: "About", to: "about" },
+  { label: "Services", to: "services" },
+  { label: "Contact", to: "contact" },
 ];
 
 // Mock Logo component
@@ -25,29 +24,11 @@ const Logo = () => (
     />
     <div className="hidden sm:block">
       <div className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-        ForgeNest
+        Forgenest Services
       </div>
     </div>
   </div>
 );
-
-function smoothScrollTo(elementId: string) {
-  const element = document.getElementById(elementId);
-  if (element) {
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }
-}
-
-function handleNavClick(href: string, setIsOpen?: (value: boolean) => void) {
-  if (href.startsWith("#")) {
-    const elementId = href.substring(1);
-    smoothScrollTo(elementId);
-    if (setIsOpen) setIsOpen(false);
-  }
-}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -99,12 +80,14 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <div className="relative z-10">
-          <button
-            onClick={() => handleNavClick("#home")}
-            className="group transition-transform duration-300 hover:scale-105"
+          <ScrollLink
+            to="home"
+            smooth={true}
+            duration={500}
+            className="group transition-transform duration-300 hover:scale-105 cursor-pointer inline-block"
           >
             <Logo />
-          </button>
+          </ScrollLink>
         </div>
 
         {/* DESKTOP NAV */}
@@ -112,14 +95,17 @@ export default function Navbar() {
           {/* Navigation Links */}
           <ul className="flex justify-start items-center gap-x-8">
             {navLinks.map((item, index) => {
-              const sectionId = item.href.substring(1);
-              const isActive = activeSection === sectionId;
+              const isActive = activeSection === item.to;
 
               return (
                 <li key={index} className="relative">
-                  <button
-                    onClick={() => handleNavClick(item.href)}
-                    className={`group relative text-base font-semibold transition-all duration-300 py-2 px-1 ${
+                  <ScrollLink
+                    to={item.to}
+                    smooth={true}
+                    duration={500}
+                    offset={-80}
+                    spy={true}
+                    className={`group relative text-base font-semibold transition-all duration-300 py-2 px-1 cursor-pointer ${
                       isActive
                         ? "text-blue-600"
                         : isScrolled
@@ -140,23 +126,26 @@ export default function Navbar() {
 
                     {/* Hover glow effect */}
                     <div className="absolute inset-0 bg-blue-500/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 opacity-0 group-hover:opacity-100 -z-10" />
-                  </button>
+                  </ScrollLink>
                 </li>
               );
             })}
           </ul>
 
           {/* CTA Button */}
-          <Button
-            onClick={() => handleNavClick("#contact")}
-            className={`group relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-base font-semibold rounded-xl px-6 py-2.5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-0 ${
+          <ScrollLink
+            to="contact"
+            smooth={true}
+            duration={500}
+            offset={-80}
+            className={`group relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-base font-semibold rounded-xl px-6 py-2.5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-0 cursor-pointer inline-flex items-center ${
               !isScrolled ? "ring-2 ring-white/20" : ""
             }`}
           >
             <Sparkles className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
             Get In Touch
             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-          </Button>
+          </ScrollLink>
         </div>
 
         {/* Mobile Nav Button */}
@@ -210,14 +199,17 @@ export default function Navbar() {
           <div className="flex-1 px-6 py-8 space-y-6">
             <ul className="space-y-4">
               {navLinks.map((item, index) => {
-                const sectionId = item.href.substring(1);
-                const isActive = activeSection === sectionId;
+                const isActive = activeSection === item.to;
 
                 return (
                   <li key={index}>
-                    <button
-                      onClick={() => handleNavClick(item.href, setIsOpen)}
-                      className={`group w-full text-left py-3 px-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-between ${
+                    <ScrollLink
+                      to={item.to}
+                      smooth={true}
+                      duration={500}
+                      offset={-80}
+                      onClick={() => setIsOpen(false)}
+                      className={`group w-full text-left py-3 px-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-between cursor-pointer ${
                         isActive
                           ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg"
                           : "text-slate-700 hover:bg-white/50 hover:text-blue-600"
@@ -240,7 +232,7 @@ export default function Navbar() {
                             : "text-gray-400 group-hover:text-blue-500"
                         } group-hover:translate-x-1`}
                       />
-                    </button>
+                    </ScrollLink>
                   </li>
                 );
               })}
@@ -248,14 +240,18 @@ export default function Navbar() {
 
             {/* Mobile CTA */}
             <div className="pt-6 border-t border-white/20">
-              <Button
-                onClick={() => handleNavClick("#contact", setIsOpen)}
-                className="group w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl py-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-0 flex items-center justify-center"
+              <ScrollLink
+                to="contact"
+                smooth={true}
+                duration={500}
+                offset={-80}
+                onClick={() => setIsOpen(false)}
+                className="group w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl py-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-0 flex items-center justify-center cursor-pointer"
               >
                 <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
                 Get In Touch
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-              </Button>
+              </ScrollLink>
             </div>
 
             {/* Mobile footer */}
