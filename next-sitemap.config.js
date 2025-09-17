@@ -6,6 +6,8 @@ module.exports = {
   changefreq: 'monthly',
   priority: 0.8,
   exclude: ['/api/*', '/admin/*', '/_next/*', '/static/*'],
+  generateRobotsTxt: true,
+  generateIndexSitemap: false,
   additionalPaths: async (config) => {
     // Define blog post slugs manually to avoid TypeScript import issues
     const blogSlugs = [
