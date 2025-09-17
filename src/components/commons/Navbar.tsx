@@ -1,16 +1,20 @@
 "use client";
 
 import { Link as ScrollLink } from "react-scroll";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X, Sparkles, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { navLinks } from "@/lib/constants/navlinks";
 
-// Navigation links data
-const navLinks = [
-  { label: "Home", to: "home" },
-  { label: "About", to: "about" },
-  { label: "Services", to: "services" },
-  { label: "Contact", to: "contact" },
+// Convert our navLinks to the format expected by the navbar
+const navigationItems = [
+  { label: "Home", to: "home", href: "/" },
+  { label: "About", to: "about", href: "/about" },
+  { label: "Services", to: "services", href: "/services" },
+  { label: "Blogs", to: "blog", href: "/blogs" },
+  { label: "Contact", to: "contact", href: "/contact" },
 ];
 
 // Mock Logo component
@@ -34,6 +38,10 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const pathname = usePathname();
+
+  // Check if we're on the home page for scroll navigation
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -94,50 +102,72 @@ export default function Navbar() {
         <div className="hidden lg:flex justify-center items-center gap-x-8">
           {/* Navigation Links */}
           <ul className="flex justify-start items-center gap-x-8">
-            {navLinks.map((item, index) => {
-              const isActive = activeSection === item.to;
+            {navigationItems.map((item, index) => {
+              const isActive = isHomePage
+                ? activeSection === item.to
+                : pathname === item.href;
 
               return (
                 <li key={index} className="relative">
-                  <ScrollLink
-                    to={item.to}
-                    smooth={true}
-                    duration={500}
-                    offset={-80}
-                    spy={true}
-                    className={`group relative text-base font-semibold transition-all duration-300 py-2 px-1 cursor-pointer ${
-                      isActive
-                        ? "text-blue-600"
-                        : isScrolled
-                        ? "text-slate-700 hover:text-blue-600"
-                        : "text-white hover:text-blue-300"
-                    }`}
-                  >
-                    {item.label}
-
-                    {/* Active indicator */}
-                    <div
-                      className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 ${
+                  {isHomePage && item.to !== "blog" ? (
+                    <Link
+                      href={item.href}
+                      className={`group relative text-base font-semibold transition-all duration-300 py-2 px-1 cursor-pointer ${
                         isActive
-                          ? "w-full opacity-100"
-                          : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
+                          ? "text-blue-600"
+                          : isScrolled
+                          ? "text-slate-700 hover:text-blue-600"
+                          : "text-white hover:text-blue-300"
                       }`}
-                    />
+                    >
+                      {item.label}
 
-                    {/* Hover glow effect */}
-                    <div className="absolute inset-0 bg-blue-500/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 opacity-0 group-hover:opacity-100 -z-10" />
-                  </ScrollLink>
+                      {/* Active indicator */}
+                      <div
+                        className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 ${
+                          isActive
+                            ? "w-full opacity-100"
+                            : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
+                        }`}
+                      />
+
+                      {/* Hover glow effect */}
+                      <div className="absolute inset-0 bg-blue-500/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 opacity-0 group-hover:opacity-100 -z-10" />
+                    </Link>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className={`group relative text-base font-semibold transition-all duration-300 py-2 px-1 ${
+                        isActive
+                          ? "text-blue-600"
+                          : isScrolled
+                          ? "text-slate-700 hover:text-blue-600"
+                          : "text-white hover:text-blue-300"
+                      }`}
+                    >
+                      {item.label}
+
+                      {/* Active indicator */}
+                      <div
+                        className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 ${
+                          isActive
+                            ? "w-full opacity-100"
+                            : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
+                        }`}
+                      />
+
+                      {/* Hover glow effect */}
+                      <div className="absolute inset-0 bg-blue-500/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 opacity-0 group-hover:opacity-100 -z-10" />
+                    </Link>
+                  )}
                 </li>
               );
             })}
           </ul>
 
           {/* CTA Button */}
-          <ScrollLink
-            to="contact"
-            smooth={true}
-            duration={500}
-            offset={-80}
+          <Link
+            href="/contact"
             className={`group relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-base font-semibold rounded-xl px-6 py-2.5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-0 cursor-pointer inline-flex items-center ${
               !isScrolled ? "ring-2 ring-white/20" : ""
             }`}
@@ -145,7 +175,7 @@ export default function Navbar() {
             <Sparkles className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
             Get In Touch
             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-          </ScrollLink>
+          </Link>
         </div>
 
         {/* Mobile Nav Button */}
@@ -198,41 +228,73 @@ export default function Navbar() {
           {/* Mobile navigation */}
           <div className="flex-1 px-6 py-8 space-y-6">
             <ul className="space-y-4">
-              {navLinks.map((item, index) => {
-                const isActive = activeSection === item.to;
+              {navigationItems.map((item, index) => {
+                const isActive = isHomePage
+                  ? activeSection === item.to
+                  : pathname === item.href;
 
                 return (
                   <li key={index}>
-                    <ScrollLink
-                      to={item.to}
-                      smooth={true}
-                      duration={500}
-                      offset={-80}
-                      onClick={() => setIsOpen(false)}
-                      className={`group w-full text-left py-3 px-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-between cursor-pointer ${
-                        isActive
-                          ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg"
-                          : "text-slate-700 hover:bg-white/50 hover:text-blue-600"
-                      }`}
-                      style={{
-                        animationDelay: `${index * 100}ms`,
-                        animation: isOpen
-                          ? `slideInRight 0.3s ease-out forwards`
-                          : "none",
-                      }}
-                    >
-                      <span>{item.label}</span>
-                      {isActive && (
-                        <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                      )}
-                      <ArrowRight
-                        className={`w-4 h-4 transition-transform duration-300 ${
+                    {isHomePage && item.to !== "blog" ? (
+                      <ScrollLink
+                        to={item.to}
+                        smooth={true}
+                        duration={500}
+                        offset={-80}
+                        onClick={() => setIsOpen(false)}
+                        className={`group w-full text-left py-3 px-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-between cursor-pointer ${
                           isActive
-                            ? "text-white"
-                            : "text-gray-400 group-hover:text-blue-500"
-                        } group-hover:translate-x-1`}
-                      />
-                    </ScrollLink>
+                            ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg"
+                            : "text-slate-700 hover:bg-white/50 hover:text-blue-600"
+                        }`}
+                        style={{
+                          animationDelay: `${index * 100}ms`,
+                          animation: isOpen
+                            ? `slideInRight 0.3s ease-out forwards`
+                            : "none",
+                        }}
+                      >
+                        <span>{item.label}</span>
+                        {isActive && (
+                          <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                        )}
+                        <ArrowRight
+                          className={`w-4 h-4 transition-transform duration-300 ${
+                            isActive
+                              ? "text-white"
+                              : "text-gray-400 group-hover:text-blue-500"
+                          } group-hover:translate-x-1`}
+                        />
+                      </ScrollLink>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`group w-full text-left py-3 px-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-between ${
+                          isActive
+                            ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg"
+                            : "text-slate-700 hover:bg-white/50 hover:text-blue-600"
+                        }`}
+                        style={{
+                          animationDelay: `${index * 100}ms`,
+                          animation: isOpen
+                            ? `slideInRight 0.3s ease-out forwards`
+                            : "none",
+                        }}
+                      >
+                        <span>{item.label}</span>
+                        {isActive && (
+                          <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                        )}
+                        <ArrowRight
+                          className={`w-4 h-4 transition-transform duration-300 ${
+                            isActive
+                              ? "text-white"
+                              : "text-gray-400 group-hover:text-blue-500"
+                          } group-hover:translate-x-1`}
+                        />
+                      </Link>
+                    )}
                   </li>
                 );
               })}

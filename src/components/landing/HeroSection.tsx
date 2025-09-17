@@ -13,14 +13,40 @@ import {
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+// Generate stable particle data for consistent rendering - moved outside component for optimization
+const particleData = [
+  { left: 15, top: 20, delay: 0.5, duration: 4 },
+  { left: 85, top: 10, delay: 1.2, duration: 5 },
+  { left: 25, top: 80, delay: 0.8, duration: 3.5 },
+  { left: 75, top: 70, delay: 2.1, duration: 4.5 },
+  { left: 45, top: 30, delay: 1.5, duration: 3.8 },
+  { left: 65, top: 90, delay: 0.3, duration: 4.2 },
+  { left: 10, top: 50, delay: 1.8, duration: 3.2 },
+  { left: 90, top: 40, delay: 0.9, duration: 4.8 },
+  { left: 35, top: 15, delay: 2.3, duration: 3.6 },
+  { left: 55, top: 85, delay: 1.1, duration: 4.1 },
+  { left: 20, top: 65, delay: 0.7, duration: 3.9 },
+  { left: 80, top: 25, delay: 1.9, duration: 4.3 },
+  { left: 40, top: 75, delay: 0.4, duration: 3.4 },
+  { left: 70, top: 35, delay: 2.0, duration: 4.6 },
+  { left: 30, top: 55, delay: 1.3, duration: 3.7 },
+  { left: 60, top: 95, delay: 0.6, duration: 4.4 },
+  { left: 95, top: 60, delay: 1.6, duration: 3.3 },
+  { left: 5, top: 45, delay: 2.2, duration: 4.7 },
+  { left: 50, top: 5, delay: 1.0, duration: 4.0 },
+  { left: 85, top: 80, delay: 1.4, duration: 3.1 }
+];
+
+const dynamicWords = ["Innovation", "Excellence", "Growth", "Success"];
+
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [currentWord, setCurrentWord] = useState(0);
-
-  const dynamicWords = ["Innovation", "Excellence", "Growth", "Success"];
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
+    setIsClient(true);
 
     // Animated text rotation
     const interval = setInterval(() => {
@@ -41,22 +67,22 @@ export default function HeroSection() {
       </div>
 
       {/* Floating particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-white rounded-full opacity-20"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animation: `float ${
-                3 + Math.random() * 4
-              }s ease-in-out infinite alternate`,
-            }}
-          />
-        ))}
-      </div>
+      {isClient && (
+        <div className="absolute inset-0 overflow-hidden">
+          {particleData.map((particle, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-white rounded-full opacity-20"
+              style={{
+                left: `${particle.left}%`,
+                top: `${particle.top}%`,
+                animationDelay: `${particle.delay}s`,
+                animation: `float ${particle.duration}s ease-in-out infinite alternate`,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Main content grid */}
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">

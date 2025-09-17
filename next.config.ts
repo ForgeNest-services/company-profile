@@ -1,8 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Performance optimizations
+  poweredByHeader: false,
+  compress: true,
+  
+  // Image optimization
   images: {
-    domains: ["images.pexels.com", "res.cloudinary.com"],
+    formats: ['image/webp', 'image/avif'],
+    domains: ["images.pexels.com", "images.unsplash.com", "res.cloudinary.com", "via.placeholder.com"],
     remotePatterns: [
       {
         protocol: "https",
@@ -12,11 +18,98 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "unsplash.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "res.cloudinary.com",
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "via.placeholder.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 86400, // 24 hours
+  },
+  
+  // Security headers
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY'
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin'
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()'
+          }
+        ]
+      }
+    ]
+  },
+  
+  // Redirects for SEO
+  async redirects() {
+    return [
+      {
+        source: '/home',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/blog',
+        destination: '/blogs',
+        permanent: true,
+      },
+      {
+        source: '/service',
+        destination: '/services',
+        permanent: true,
+      }
+    ]
+  },
+  
+  // Experimental features for performance
+  experimental: {
+    scrollRestoration: true,
+  },
+  
+  // Webpack optimization
+  webpack: (config, { dev, isServer }) => {
+    // Optimize bundle size
+    if (!dev && !isServer) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@': require('path').resolve(__dirname, 'src'),
+      };
+    }
+    
+    return config;
   },
 };
 
