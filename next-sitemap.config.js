@@ -2,7 +2,7 @@
 module.exports = {
   siteUrl: "https://www.forgenestservices.com.np",
   generateRobotsTxt: true,
-  sitemapSize: 5000,
+  sitemapSize: 7000,
   changefreq: 'monthly',
   priority: 0.8,
   exclude: ['/api/*', '/admin/*', '/_next/*', '/static/*'],
