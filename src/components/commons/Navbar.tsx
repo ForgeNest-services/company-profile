@@ -1,6 +1,5 @@
 "use client";
 
-import { Link as ScrollLink } from "react-scroll";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X, Sparkles, ArrowRight } from "lucide-react";
@@ -88,14 +87,12 @@ export default function Navbar() {
       <nav className="max-w-screen-2xl w-full mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <div className="relative z-10">
-          <ScrollLink
-            to="home"
-            smooth={true}
-            duration={500}
+          <Link
+            href="/"
             className="group transition-transform duration-300 hover:scale-105 cursor-pointer inline-block"
           >
             <Logo />
-          </ScrollLink>
+          </Link>
         </div>
 
         {/* DESKTOP NAV */}
@@ -236,12 +233,8 @@ export default function Navbar() {
                 return (
                   <li key={index}>
                     {isHomePage && item.to !== "blog" ? (
-                      <ScrollLink
-                        to={item.to}
-                        smooth={true}
-                        duration={500}
-                        offset={-80}
-                        onClick={() => setIsOpen(false)}
+                      <Link
+                        href={item.href}
                         className={`group w-full text-left py-3 px-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-between cursor-pointer ${
                           isActive
                             ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg"
@@ -265,7 +258,7 @@ export default function Navbar() {
                               : "text-gray-400 group-hover:text-blue-500"
                           } group-hover:translate-x-1`}
                         />
-                      </ScrollLink>
+                      </Link>
                     ) : (
                       <Link
                         href={item.href}
@@ -302,18 +295,14 @@ export default function Navbar() {
 
             {/* Mobile CTA */}
             <div className="pt-6 border-t border-white/20">
-              <ScrollLink
-                to="contact"
-                smooth={true}
-                duration={500}
-                offset={-80}
-                onClick={() => setIsOpen(false)}
+              <Link
+                href="/contact"
                 className="group w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl py-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-0 flex items-center justify-center cursor-pointer"
               >
                 <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
                 Get In Touch
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-              </ScrollLink>
+              </Link>
             </div>
 
             {/* Mobile footer */}

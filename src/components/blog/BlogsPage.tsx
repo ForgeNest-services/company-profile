@@ -52,9 +52,14 @@ export default function BlogsPage() {
         )}
         
         <div className={`relative ${featured ? 'mb-6' : 'mb-4'} overflow-hidden rounded-xl`}>
-          <div className={`aspect-video bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center ${featured ? 'h-48' : 'h-40'}`}>
-            <BookOpen className={`${featured ? 'w-12 h-12' : 'w-8 h-8'} text-gray-400`} />
-          </div>
+          <Image
+            src={post.image}
+            alt={post.title}
+            width={400}
+            height={featured ? 240 : 200}
+            className={`w-full object-cover transition-transform duration-300 group-hover:scale-105 ${featured ? 'h-48' : 'h-40'}`}
+            priority={featured}
+          />
         </div>
 
         <div className="space-y-4">

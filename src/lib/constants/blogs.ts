@@ -11,19 +11,19 @@ export const blogs: Blog[] = [
     title: "The Art of Modern Web Development",
     date: "January 15, 2025",
     image:
-      "https://images.pexels.com/photos/326514/pexels-photo-326514.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
   },
   {
     id: 2,
     title: "Understanding React Design Patterns",
     date: "January 22, 2025",
     image:
-      "https://d2ms8rpfqc4h24.cloudfront.net/perks_of_using_design_patterns_in_reactjs_dca2ef4c38.jpg",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
   },
   {
     id: 3,
     title: "Building Responsive Layouts with Tailwind",
     date: "January 30, 2025",
-    image: "",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
   },
 ];

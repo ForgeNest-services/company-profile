@@ -19,6 +19,7 @@ import {
   Home
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 
 interface BlogPostPageProps {
@@ -239,11 +240,16 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
             </div>
           </header>
 
-          {/* Featured Image Placeholder */}
+          {/* Featured Image */}
           <div className="relative mb-12 overflow-hidden rounded-2xl">
-            <div className="aspect-video bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
-              <BookOpen className="w-24 h-24 text-blue-300" />
-            </div>
+            <Image
+              src={post.image}
+              alt={post.title}
+              width={800}
+              height={400}
+              className="w-full h-96 object-cover"
+              priority
+            />
           </div>
 
           {/* Article Content */}
@@ -339,8 +345,14 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
                       href={`/blogs/${relatedPost.slug}`}
                       className="group bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-colors"
                     >
-                      <div className="flex items-center justify-center w-full h-32 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg mb-4">
-                        <BookOpen className="w-8 h-8 text-gray-400" />
+                      <div className="relative w-full h-32 overflow-hidden rounded-lg mb-4">
+                        <Image
+                          src={relatedPost.image}
+                          alt={relatedPost.title}
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
                       </div>
                       <h4 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-2 line-clamp-2">
                         {relatedPost.title}
