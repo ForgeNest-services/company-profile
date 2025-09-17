@@ -81,6 +81,8 @@ module.exports = {
   },
   trailingSlash: false,
   generateIndexSitemap: false,
+  outDir: './public',
+  sitemapBaseFileName: 'sitemap',
   transform: async (config, path) => {
     // Custom priority and changefreq for different page types
     if (path === '/') {
