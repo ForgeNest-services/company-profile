@@ -54,6 +54,12 @@ All blog images have been updated to use high-quality images from Unsplash that 
 - **Description**: Business partnership handshake with technology background
 - **Photographer**: Unsplash
 
+### Website Image (Local)
+- **Image Path**: /blogs/website.png
+- **Description**: Banner image for "Why Every Business Needs a Website" — suitable for small-business website guide.
+- **Usage**: Used by the blog post "Why Every Business Needs a Website"
+- **Location**: Place the image file at d:\FORGENEST\company_profile\public\blogs\website.png (served as /blogs/website.png)
+
 ## Next.js Image Configuration
 
 The following remote patterns have been added to `next.config.ts` to support these image sources:
